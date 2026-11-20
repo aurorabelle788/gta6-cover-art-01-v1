@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunset Cover Maker — GTA-style poster art</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <h1>SUNSET COVER MAKER</h1>
+    <p>Turn your photos into a bold multi-panel poster — Vice City sunset style.</p>
+  </div>
+  <div class="top-actions">
+    <label class="btn btn-primary" for="upload">Upload photos</label>
+    <input id="upload" type="file" accept="image/*" multiple hidden>
+    <button class="btn" id="loadSample" type="button">Load sample photo</button>
+    <button class="btn" id="loadSecond" type="button">Load 2nd sample</button>
+  </div>
+</header>
+
+<main>
+  <section class="toolbar" aria-label="Export controls">
+    <div class="group">
+      <span class="label">Export size</span>
+      <div class="sizes" role="group" aria-label="Export size">
+        <button class="btn size-btn" type="button" data-size="1080x1080">1080 &times; 1080</button>
+        <button class="btn size-btn" type="button" data-size="1080x1350">1080 &times; 1350</button>
+        <button class="btn size-btn active" type="button" data-size="1920x1080">1920 &times; 1080</button>
+      </div>
+    </div>
+    <div class="group">
+      <span class="label">Poster</span>
+      <button class="btn" id="fillAll" type="button">Fill all panels with first photo</button>
+      <button class="btn" id="shuffle" type="button">Shuffle panel photos</button>
+    </div>
+    <button class="btn btn-export" id="exportBtn" type="button">Export PNG</button>
+  </section>
+
+  <div class="workbench">
+    <div class="stage">
+      <canvas id="preview" width="1920" height="1080"></canvas>
+      <p class="hint">Click a panel to select it &middot; drag inside it to move the photo &middot; scroll to zoom &middot; the white outline marks the selected panel.</p>
+      <p class="status" id="status" role="status">No photo yet — upload your own or load the sample photo.</p>
+    </div>
+
+    <aside class="panel" aria-label="Editor">
+      <h2>Caption</h2>
+      <label class="field">
+        <span>Title</span>
+        <input id="titleInput" type="text" value="SUNSET CITY" maxlength="24" autocomplete="off">
+      </label>
+      <label class="field">
+        <span>Subtitle</span>
+        <input id="subtitleInput" type="text" value="CHASE THE NEON" maxlength="48" autocomplete="off">
+      </label>
+
+      <h2>Selected panel</h2>
+      <p class="selected-label" id="selectedLabel">Panel 1 — hero (left, tall)</p>
+      <label class="field">
+        <span>Photo</span>
+        <select id="panelPhoto"></select>
+      </label>
+      <label class="field">
+        <span>Zoom <output id="zoomOut">100%</output></span>
+        <input id="zoom" type="range" min="100" max="300" value="100">
+      </label>
+      <label class="field">
+        <span>Move sideways <output id="oxOut">0%</output></span>
+        <input id="ox" type="range" min="-50" max="50" value="0">
+      </label>
+      <label class="field">
+        <span>Move up / down <output id="oyOut">0%</output></span>
+        <input id="oy" type="range" min="-50" max="50" value="0">
+      </label>
+      <button class="btn" id="resetPanel" type="button">Reset this panel</button>
+
+      <h2>Photos</h2>
+      <div class="thumbs" id="thumbs"></div>
+      <p class="note">Click a photo, then pick a panel above — or use “Fill all panels”. Photos never leave your device: they are read locally and never uploaded anywhere.</p>
+
+      <h2>Look</h2>
+      <label class="check"><input id="grade" type="checkbox" checked> Sunset colour grade</label>
+      <label class="check"><input id="halftone" type="checkbox" checked> Comic halftone dots</label>
+      <label class="check"><input id="borders" type="checkbox" checked> White panel borders</label>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <p>Original art only — no Rockstar logos, artwork, characters or fonts. Display type: Anton (SIL Open Font License 1.1, see fonts/OFL.txt). Works fully offline.</p>
+</footer>
+
+<script src="src/app.js"></script>
+</body>
+</html>
